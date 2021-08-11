@@ -1,6 +1,5 @@
 package com.mycompany.app;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -25,6 +24,10 @@ public class App
         transactions.add("beaver");
         transactions.add("beaver");
 
+        // sort above in:
+        // 1. by amounts
+        // 2. alphabetical order
+        // expected output:
         // beaver_4, wombat_3, jungle_2, koala_2
 
         Map<String, Integer> sorted = new TreeMap<>();
@@ -37,25 +40,25 @@ public class App
             sorted.put(transaction, sorted.get(transaction) + 1);
         }
 
-        class Ent {
+        class Transaction {
             public final String transaction;
             public final Integer amount;
-            Ent(String transaction, Integer amount) {
+            Transaction(String transaction, Integer amount) {
                 this.transaction = transaction;
                 this.amount = amount;
             }
         }
 
-        List<Ent> ents = new ArrayList<Ent>();
+        List<Transaction> transactionsList = new ArrayList<Transaction>();
 
         for (Map.Entry<String, Integer> entry: sorted.entrySet()) {
-            ents.add(new Ent(entry.getKey(), entry.getValue()));
+            transactionsList.add(new Transaction(entry.getKey(), entry.getValue()));
         }
 
-        ents.sort((Ent x, Ent y) -> {return y.amount - x.amount;});
+        transactionsList.sort((Transaction x, Transaction y) -> {return y.amount - x.amount;});
 
-        ents.forEach(
-                (Ent x) -> System.out.println(x.transaction + " " + x.amount)
+        transactionsList.forEach(
+                (Transaction x) -> System.out.println(x.transaction + "_" + x.amount)
         );
 
     }
